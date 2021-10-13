@@ -3,14 +3,10 @@ package com.hcd.argus.event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.context.ApplicationEvent;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.Month;
-
-import static org.mockito.Mockito.*;
 
 class AbstractEventListenerTest {
 
@@ -42,34 +38,6 @@ class AbstractEventListenerTest {
         final String expected = "13 Sep 2021 14:00:00 GMT";
         final String formattedDate = listener.format(input);
         Assertions.assertEquals(expected, formattedDate);
-    }
-
-    @Test
-    void contextPath() {
-        final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-
-        final String scheme = "https";
-        final String server = "server";
-        final int port = 80;
-        final String contextPath = "/app";
-
-        when(request.getScheme())
-                .thenReturn(scheme);
-        when(request.getServerName())
-                .thenReturn(server);
-        when(request.getServerPort())
-                .thenReturn(port);
-        when(request.getContextPath())
-                .thenReturn(contextPath);
-
-        final String expected = scheme + "://" + server + ":" + port + contextPath;
-        Assertions.assertEquals(expected, AbstractEventListener.contextPath(request));
-
-        verify(request).getScheme();
-        verify(request).getServerName();
-        verify(request).getServerPort();
-        verify(request).getContextPath();
-        verifyNoMoreInteractions(request);
     }
 
     @Test

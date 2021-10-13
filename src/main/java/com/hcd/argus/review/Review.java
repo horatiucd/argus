@@ -25,10 +25,10 @@ public class Review {
     private LocalDateTime dateCancelled;
 
     public Review(Status status,
-                  String description, LocalDateTime dateCreated) {
+                  String description) {
         this.description = description;
         this.status = status;
-        this.dateCreated = dateCreated;
+        dateCreated = LocalDateTime.now();
     }
 
     public enum Status {

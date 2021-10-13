@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 class ReviewModelAssemblerTest {
@@ -21,8 +20,7 @@ class ReviewModelAssemblerTest {
     @Test
     void toModel_draftReview() {
         final long id = 10L;
-        final Review review = new Review(Review.Status.DRAFT,
-                "Review", LocalDateTime.now());
+        final Review review = new Review(Review.Status.DRAFT, "Review");
         review.setId(id);
 
         final EntityModel<Review> model = modelAssembler.toModel(review);
@@ -39,8 +37,7 @@ class ReviewModelAssemblerTest {
     @Test
     void toModel_openReview() {
         final long id = 10L;
-        final Review review = new Review(Review.Status.OPEN,
-                "Review", LocalDateTime.now());
+        final Review review = new Review(Review.Status.OPEN, "Review");
         review.setId(id);
 
         final EntityModel<Review> model = modelAssembler.toModel(review);
@@ -61,8 +58,7 @@ class ReviewModelAssemblerTest {
     @Test
     void toModel_closedReview() {
         final long id = 10L;
-        final Review review = new Review(Review.Status.CLOSED,
-                "Review", LocalDateTime.now());
+        final Review review = new Review(Review.Status.CLOSED, "Review");
         review.setId(id);
 
         final EntityModel<Review> model = modelAssembler.toModel(review);
@@ -75,8 +71,7 @@ class ReviewModelAssemblerTest {
     @Test
     void toModel_cancelledReview() {
         final long id = 10L;
-        final Review review = new Review(Review.Status.CANCELLED,
-                "Review", LocalDateTime.now());
+        final Review review = new Review(Review.Status.CANCELLED, "Review");
         review.setId(id);
 
         final EntityModel<Review> model = modelAssembler.toModel(review);

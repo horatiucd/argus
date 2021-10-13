@@ -3,7 +3,6 @@ package com.hcd.argus.event;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -29,12 +28,6 @@ abstract class AbstractEventListener<T extends ApplicationEvent> implements Appl
 	
 	protected String format(LocalDateTime date) {
 		return formatter.format(date.atZone(ZoneId.of("GMT")));
-	}
-
-	static String contextPath(HttpServletRequest request) {
-		return String.format("%s://%s:%d%s",
-				request.getScheme(), request.getServerName(),
-				request.getServerPort(), request.getContextPath());
 	}
 
 	static String formatLink(String uri, String rel) {

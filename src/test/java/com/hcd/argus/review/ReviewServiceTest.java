@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,8 +74,7 @@ class ReviewServiceTest {
     @Test
     void open_notAllowed() {
         final long id = 10L;
-        final Review reviewToOpen = new Review(Review.Status.OPEN,
-                "Open Review", LocalDateTime.now());
+        final Review reviewToOpen = new Review(Review.Status.OPEN, "Open Review");
         reviewToOpen.setId(id);
 
         when(mockRepository.findById(reviewToOpen.getId()))
@@ -92,8 +90,7 @@ class ReviewServiceTest {
 
     @Test
     void open() {
-        final Review reviewToOpen = new Review(Review.Status.DRAFT,
-                "Review", LocalDateTime.now());
+        final Review reviewToOpen = new Review(Review.Status.DRAFT, "Review");
         reviewToOpen.setId(20L);
 
         Assertions.assertNull(reviewToOpen.getDateOpened());
@@ -116,8 +113,7 @@ class ReviewServiceTest {
     @Test
     void close_notAllowed() {
         final long id = 20L;
-        final Review reviewToClose = new Review(Review.Status.DRAFT,
-                "Review", LocalDateTime.now());
+        final Review reviewToClose = new Review(Review.Status.DRAFT, "Review");
         reviewToClose.setId(id);
 
         when(mockRepository.findById(id))
@@ -134,8 +130,7 @@ class ReviewServiceTest {
     @Test
     void close() {
         final long id = 20L;
-        final Review reviewToClose = new Review(Review.Status.OPEN,
-                "Review", LocalDateTime.now());
+        final Review reviewToClose = new Review(Review.Status.OPEN, "Review");
         reviewToClose.setId(id);
 
         Assertions.assertNull(reviewToClose.getDateClosed());
@@ -158,8 +153,7 @@ class ReviewServiceTest {
     @Test
     void cancel_notAllowed() {
         final long id = 20L;
-        final Review reviewToCancel = new Review(Review.Status.DRAFT,
-                "Review", LocalDateTime.now());
+        final Review reviewToCancel = new Review(Review.Status.DRAFT, "Review");
         reviewToCancel.setId(id);
 
         when(mockRepository.findById(id))
@@ -176,8 +170,7 @@ class ReviewServiceTest {
     @Test
     void cancel() {
         final long id = 20L;
-        final Review reviewToCancel = new Review(Review.Status.OPEN,
-                "Review", LocalDateTime.now());
+        final Review reviewToCancel = new Review(Review.Status.OPEN, "Review");
         reviewToCancel.setId(id);
 
         Assertions.assertNull(reviewToCancel.getDateCancelled());
@@ -200,8 +193,7 @@ class ReviewServiceTest {
     @Test
     void search() {
         final String filter = "review";
-        final Review review = new Review(Review.Status.OPEN,
-                "Review", LocalDateTime.now());
+        final Review review = new Review(Review.Status.OPEN, "Review");
         review.setId(10L);
         List<Review> expected = List.of(review);
 
