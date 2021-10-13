@@ -26,13 +26,13 @@ public class ArgusApplication {
             Review open = new Review(Review.Status.OPEN, "Open");
             open.setDateOpened(open.getDateCreated().plusMinutes(5));
 
-            Review cancelled = new Review(Review.Status.CANCELLED, "Cancelled");
-            cancelled.setDateOpened(cancelled.getDateCreated().plusMinutes(5));
-            cancelled.setDateCancelled(cancelled.getDateOpened().plusMinutes(10));
-
             Review closed = new Review(Review.Status.CLOSED, "Closed");
             closed.setDateOpened(closed.getDateCreated().plusMinutes(10));
             closed.setDateClosed(closed.getDateOpened().plusMinutes(15));
+
+            Review cancelled = new Review(Review.Status.CANCELLED, "Cancelled");
+            cancelled.setDateOpened(cancelled.getDateCreated().plusMinutes(5));
+            cancelled.setDateCancelled(cancelled.getDateOpened().plusMinutes(10));
 
             List.of(draft, open, closed, cancelled)
                     .forEach(review -> log.info("Persisted " + repository.save(review)));
