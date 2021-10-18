@@ -11,4 +11,6 @@ public @interface DeprecatedResource {
     String alternate() default "";
 
     String policy() default "";
+
+    String sunset() default "";
 }

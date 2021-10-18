@@ -1,16 +1,13 @@
 package com.hcd.argus.event;
 
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-abstract class AbstractEventListener<T extends ApplicationEvent> implements ApplicationListener<T> {
+abstract class AbstractEventListener {
 
-	protected final DateTimeFormatter formatter;
+	private final DateTimeFormatter formatter;
 	
 	protected AbstractEventListener() {
 		formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss z");

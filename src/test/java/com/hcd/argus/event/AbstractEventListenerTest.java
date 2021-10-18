@@ -3,7 +3,6 @@ package com.hcd.argus.event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationEvent;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -48,18 +47,7 @@ class AbstractEventListenerTest {
         Assertions.assertEquals("<" + uri + ">; rel=\"" + rel + "\"", link);
     }
 
-    private static class CustomEventListener extends AbstractEventListener<CustomEvent> {
+    private static class CustomEventListener extends AbstractEventListener {
 
-        @Override
-        public void onApplicationEvent(CustomEvent customEvent) {
-
-        }
-    }
-
-    private static class CustomEvent extends ApplicationEvent {
-
-        public CustomEvent(Object source) {
-            super(source);
-        }
     }
 }
