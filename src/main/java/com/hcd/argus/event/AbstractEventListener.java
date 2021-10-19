@@ -24,7 +24,7 @@ abstract class AbstractEventListener {
 	}
 	
 	protected String format(LocalDateTime date) {
-		return formatter.format(date.atZone(ZoneId.of("GMT")));
+		return formatter.format(date.atZone(ZoneId.of("UTC")));
 	}
 
 	static String formatLink(String uri, String rel) {
