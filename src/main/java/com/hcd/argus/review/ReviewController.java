@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static org.springframework.hateoas.CollectionModel.of;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -38,7 +37,7 @@ public class ReviewController {
 
         List<EntityModel<Review>> content = reviews.stream()
                 .map(assembler::toModel)
-                .collect(toList());
+                .toList();
 
         Link link = linkTo(methodOn(getClass()).all(response)).withSelfRel();
 
@@ -76,7 +75,7 @@ public class ReviewController {
 
         List<EntityModel<Review>> content = reviews.stream()
                 .map(assembler::toModel)
-                .collect(toList());
+                .toList();
 
         Link link = linkTo(methodOn(getClass()).search(filter)).withSelfRel();
 
