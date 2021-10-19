@@ -17,8 +17,7 @@ abstract class AnnotatedHandlerMethodInterceptor<A extends Annotation> implement
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) {
-        if (handler instanceof HandlerMethod) {
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
+        if (handler instanceof HandlerMethod handlerMethod) {
             final A annotation = handlerMethod.getMethod().getAnnotation(getAnnotationClass());
             if (annotation == null) {
                 return true;
