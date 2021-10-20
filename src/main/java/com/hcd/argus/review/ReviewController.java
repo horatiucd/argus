@@ -45,6 +45,20 @@ public class ReviewController {
                 .body(of(content, link));
     }
 
+    @GetMapping("/reviews/search")
+    public ResponseEntity<?> search(@RequestParam(name = "filter") String filter) {
+        final List<Review> reviews = service.search(filter);
+
+        List<EntityModel<Review>> content = reviews.stream()
+                .map(assembler::toModel)
+                .toList();
+
+        Link link = linkTo(methodOn(getClass()).search(filter)).withSelfRel();
+
+        return ResponseEntity.ok()
+                .body(of(content, link));
+    }
+
     @GetMapping("/reviews/{id}")
     public ResponseEntity<?> one(HttpServletResponse response, @PathVariable Long id) {
         Review review = service.findOne(id);
@@ -67,19 +81,5 @@ public class ReviewController {
     public ResponseEntity<?> close(@PathVariable Long id) {
         final Review review = service.close(id);
         return ok(assembler.toModel(review));
-    }
-
-    @GetMapping("/reviews/search")
-    public ResponseEntity<?> search(@RequestParam(name = "filter") String filter) {
-        final List<Review> reviews = service.search(filter);
-
-        List<EntityModel<Review>> content = reviews.stream()
-                .map(assembler::toModel)
-                .toList();
-
-        Link link = linkTo(methodOn(getClass()).search(filter)).withSelfRel();
-
-        return ResponseEntity.ok()
-                .body(of(content, link));
     }
 }
