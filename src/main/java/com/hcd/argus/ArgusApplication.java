@@ -35,7 +35,7 @@ public class ArgusApplication {
             cancelled.setDateCancelled(cancelled.getDateOpened().plusMinutes(10));
 
             List.of(draft, open, closed, cancelled)
-                    .forEach(review -> log.info("Persisted " + repository.save(review)));
+                    .forEach(review -> log.info("Persisted {}.", repository.save(review)));
         };
     }
 }
