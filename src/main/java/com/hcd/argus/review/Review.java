@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @Entity
-public class Review {
+public class Review implements Sunsetable {
 
     @Id
     @GeneratedValue
@@ -33,6 +34,15 @@ public class Review {
         this.description = description;
         this.status = status;
         dateCreated = LocalDateTime.now();
+    }
+
+    @Override
+    public Optional<LocalDateTime> sunsetDate() {
+        return switch (status) {
+            case DRAFT -> Optional.of(dateCreated.plusDays(2));
+            case CANCELLED -> Optional.of(dateCancelled.plusYears(1));
+            default -> Optional.empty();
+        };
     }
 
     public enum Status {

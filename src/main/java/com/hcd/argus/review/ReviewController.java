@@ -1,5 +1,7 @@
 package com.hcd.argus.review;
 
+import com.hcd.argus.event.SunsetEvent;
+import com.hcd.argus.interceptor.DeprecatedResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.hateoas.EntityModel;
@@ -31,6 +33,10 @@ public class ReviewController {
         this.assembler = assembler;
     }
 
+    @DeprecatedResource(since = "22 Oct 2021 00:00:00 UTC",
+        alternate = "/reviews/search?filter=pattern",
+        policy = "http://technically-correct.eu/policy",
+        sunset = "31 Dec 2021 00:00:00 UTC")
     @GetMapping("/reviews")
     public ResponseEntity<?> all(HttpServletResponse response) {
         final List<Review> reviews = service.findAll();
@@ -62,6 +68,10 @@ public class ReviewController {
     @GetMapping("/reviews/{id}")
     public ResponseEntity<?> one(HttpServletResponse response, @PathVariable Long id) {
         Review review = service.findOne(id);
+
+        review.sunsetDate()
+                .ifPresent(date -> eventPublisher.publishEvent(new SunsetEvent(response, date)));
+
         return ResponseEntity.ok(assembler.toModel(review));
     }
 
